@@ -29,7 +29,7 @@ const AdminAddVideo = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch('http://localhost:4570/api/videos', {
+    const response = await fetch('http://localhost:8086/api/videos', {
       method: 'POST',
       credentials: 'include', 
       headers: { 'Content-Type': 'application/json' },
