@@ -33,7 +33,7 @@ const Signin = () => {
     }
 
     try {
-      const res = await fetch("http://streamify-backend:8080/api/login", {
+      const res = await fetch("http://localhost:8086/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
