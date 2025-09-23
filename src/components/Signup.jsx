@@ -5,48 +5,52 @@ import './../assets/css/Signup.css';
 const Signup = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
 
     const handleRegister = async () => {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z.-]+\.(com|in|org|net)$/i;
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z.-]+\.(com|in|org|net)$/i;
 
-    if (!emailRegex.test(email)) {
-        setError("Please enter a valid email address.");
-        return;
-    }
-
-    // Extract domain part between @ and .
-    const domainPart = email.substring(email.indexOf('@') + 1, email.lastIndexOf('.'));
-    if (/\d/.test(domainPart)) {
-        setError("Email domain must not contain numbers (e.g., user@abc.com is valid, but not user@abc123.com)");
-        return;
-    }
-
-    if (password !== confirmPassword) {
-        setError("Passwords do not match");
-        return;
-    }
-
-    try {
-        const response = await fetch("http://backend:8080/api/register", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password, role: 0 }),
-        });
-
-        if (response.ok) {
-            navigate("/signin");
-        } else {
-            const data = await response.text();
-            setError(data);
+        if (!emailRegex.test(email)) {
+            setError("Please enter a valid email address.");
+            return;
         }
-    } catch (err) {
-        setError("Registration failed. Please try again.");
-    }
-};
 
+        const domainPart = email.substring(email.indexOf('@') + 1, email.lastIndexOf('.'));
+        if (/\d/.test(domainPart)) {
+            setError("Email domain must not contain numbers.");
+            return;
+        }
+
+        if (!username) {
+            setError("Please enter a username.");
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            setError("Passwords do not match.");
+            return;
+        }
+
+        try {
+            const response = await fetch("http://localhost:8086/api/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, username, password, role: 0 }),
+            });
+
+            const data = await response.text();
+            if (data.startsWith("200")) {
+                navigate("/signin");
+            } else {
+                setError(data);
+            }
+        } catch (err) {
+            setError("Registration failed. Please try again.");
+        }
+    };
 
     return (
         <div className="signin-container">
@@ -57,6 +61,12 @@ const Signup = () => {
                     placeholder="Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                />
+                <input
+                    type="text"
+                    placeholder="Username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                 />
                 <input
                     type="password"
