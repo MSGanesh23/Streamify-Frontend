@@ -6,7 +6,7 @@ const GenreSection = ({ genre }) => {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
-   axios.get(`http://localhost:4570/api/genre/${genre}`, {
+   axios.get(`http://localhost:8086/api/genre/${genre}`, {
   withCredentials: true,
   headers: {
     Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
