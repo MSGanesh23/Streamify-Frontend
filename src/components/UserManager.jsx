@@ -34,7 +34,7 @@ const UserManager = () => {
 
   const fetchUsers = async (email = "") => {
     try {
-      const response = await axios.get("http://localhost:4570/api/users/search", {
+      const response = await axios.get("http://localhost:8086/api/users/search", {
         params: { email },
       });
       setUsers(response.data);
@@ -49,7 +49,7 @@ const UserManager = () => {
 
     try {
       setDeletingEmail(userEmail);
-      await axios.delete("http://localhost:4570/api/users/delete", {
+      await axios.delete("http://localhost:8086/api/users/delete", {
         params: { email: userEmail },
       });
       alert("User deleted successfully");
