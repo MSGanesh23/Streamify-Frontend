@@ -1,8 +1,10 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 
-// 👇 Hardcode the base path to match your Tomcat context path
+// 👇 Pick up environment variable VITE_BASE from Jenkins, fallback to '/frontapp1/'
+const basePath = process.env.VITE_BASE || '/frontapp1/'
+
 export default defineConfig({
-  base: '/frontapp1/', // ✅ This must match your WAR context (frontapp1)
+  base: basePath,
   plugins: [react()]
 })
