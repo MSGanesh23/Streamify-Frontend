@@ -25,7 +25,7 @@ const Signin = () => {
             if (data.startsWith("200")) {
                 const token = data.split("::")[1];
                 localStorage.setItem("jwtToken", token);
-                navigate("/dashboard"); // replace with your main page
+                navigate("/userDashboard"); // replace with your main page
             } else {
                 setError(data);
             }
