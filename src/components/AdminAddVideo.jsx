@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import './../assets/css/AdminAddVideo.css';
 import AdminNavbar from '../components/AdminNavbar';
 
+// Importing Backend API from .env
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const AdminAddVideo = () => {
   const loggedInEmail = sessionStorage.getItem('email');
 
@@ -29,7 +32,7 @@ const AdminAddVideo = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch('http://localhost:30080/api/videos', {
+    const response = await fetch(`${API_BASE_URL}/api/videos`, {
       method: 'POST',
       credentials: 'include', 
       headers: { 'Content-Type': 'application/json' },

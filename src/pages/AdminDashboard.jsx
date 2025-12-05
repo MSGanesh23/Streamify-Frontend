@@ -5,6 +5,8 @@ import Footer from '../components/Footer';
 import HeroBanner from '../components/HeroBanner';
 import MovieSection from '../components/MovieSection';
 import './../assets/css/AdminDashboard.css';
+// Importing Backend API from .env
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
@@ -26,7 +28,7 @@ export default function AdminDashboard() {
 
   // fetch videos
   useEffect(() => {
-    fetch('http://localhost:30080/api/videos')
+    fetch(`${API_BASE_URL}/api/videos`)
       .then((res) => {
         if (!res.ok) throw new Error('Failed to fetch videos');
         return res.json();

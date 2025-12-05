@@ -5,6 +5,9 @@ import "../assets/css/UserManager.css";
 
 let debounceTimer;
 
+// Importing Backend API from .env
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const UserManager = () => {
   const [searchEmail, setSearchEmail] = useState("");
   const [users, setUsers] = useState([]);
@@ -27,7 +30,7 @@ const UserManager = () => {
 
   const fetchUsers = async (email = "") => {
     try {
-      const res = await axios.get("http://localhost:30080/api/users/search", {
+      const res = await axios.get(`${API_BASE_URL}/api/users/search`, {
         params: { email },
       });
       setUsers(res.data);
@@ -42,7 +45,7 @@ const UserManager = () => {
 
     try {
       setDeletingUsername(username);
-      await axios.delete("http://localhost:30080/api/users/deleteByUsername", {
+      await axios.delete(`${API_BASE_URL}/api/users/deleteByUsername`, {
         params: { username },
       });
 

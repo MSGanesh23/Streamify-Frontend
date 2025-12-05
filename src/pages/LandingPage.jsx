@@ -4,6 +4,8 @@ import HeroBanner from "../components/HeroBanner";
 import MovieSection from "../components/MovieSection";
 import Footer from "../components/Footer";
 import "../assets/css/LandingPage.css";
+// Importing Backend API from .env
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const LandingPage = () => {
   const [movies, setMovies] = useState([]);
@@ -12,7 +14,7 @@ const LandingPage = () => {
   const [selectedGenre, setSelectedGenre] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:30080/api/videos")
+    fetch(`${API_BASE_URL}/api/videos`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch videos");
         return res.json();

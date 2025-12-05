@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import MovieSection from "../components/MovieSection";
 import Footer from "../components/Footer";
+// Importing Backend API from .env
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const MyListPage = () => {
   const [watchlist, setWatchlist] = useState([]);
 
   useEffect(() => {
     const username = localStorage.getItem("username"); // ✅ now using username
-    fetch(`http://localhost:30080/api/watchlist?username=${username}`)
+    fetch(`${API_BASE_URL}/api/watchlist?username=${username}`)
       .then((res) => res.json())
       .then((data) => setWatchlist(data))
       .catch((err) => console.error(err));

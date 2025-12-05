@@ -4,6 +4,9 @@ import AdminNavbar from '../components/AdminNavbar';
 import axios from "axios";
 import "../assets/css/AddAdmin.css"; // Optional: Reuse dashboard styles
 
+// Importing Backend API from .env
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const AddAdmin = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");   // ✅ new
@@ -23,7 +26,7 @@ const AddAdmin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:30080/api/addAdmin", {
+      const response = await axios.post(`${API_BASE_URL}/api/addAdmin`, {
         username,   // ✅ added
         email,
         password,

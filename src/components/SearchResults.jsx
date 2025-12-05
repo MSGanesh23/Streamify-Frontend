@@ -2,6 +2,9 @@ import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import "./../assets/css/MovieSection.css";
 
+// Importing Backend API from .env
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const SearchResults = ({ results }) => {
   const rowRef = useRef(null);
 
@@ -18,7 +21,7 @@ const SearchResults = ({ results }) => {
     try {
       const username = localStorage.getItem("username");
       const res = await fetch(
-        `http://localhost:30080/api/watchlist/add?username=${username}&videoId=${videoId}`,
+        `${API_BASE_URL}/api/watchlist/add?username=${username}&videoId=${videoId}`,
         { method: "POST" }
       );
       const data = await res.json();

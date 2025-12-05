@@ -1,6 +1,9 @@
 import React, { useRef } from "react";
 import "./../assets/css/MovieSection.css";
 
+// Importing Backend API from .env
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const MovieSection = ({ title, movies }) => {
   const rowRef = useRef(null);
 
@@ -18,7 +21,7 @@ const MovieSection = ({ title, movies }) => {
   const addToWatchlist = (videoId) => {
     const username = localStorage.getItem("username"); // ✅ now using username
     fetch(
-      `http://localhost:30080/api/watchlist/add?username=${username}&videoId=${videoId}`,
+      `${API_BASE_URL}/api/watchlist/add?username=${username}&videoId=${videoId}`,
       { method: "POST" }
     )
       .then((res) => res.json())

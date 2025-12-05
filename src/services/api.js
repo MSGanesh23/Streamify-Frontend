@@ -1,6 +1,7 @@
 // src/services/api.js
 
-const API_BASE_URL = 'http://localhost:30080/api/videos'; // Adjust the base URL as needed
+// Use the Vite environment variable for the API base URL
+const API_BASE_URL = `${import.meta.env.VITE_API_BASE_URL}/api/videos`;
 
 // Function to fetch all videos
 export const fetchVideos = async () => {
@@ -12,7 +13,7 @@ export const fetchVideos = async () => {
     return await response.json();
   } catch (error) {
     console.error("Failed to fetch videos:", error);
-    throw error; // Rethrow the error for further handling
+    throw error;
   }
 };
 
@@ -26,7 +27,7 @@ export const fetchVideoById = async (id) => {
     return await response.json();
   } catch (error) {
     console.error(`Failed to fetch video with ID ${id}:`, error);
-    throw error; // Rethrow the error for further handling
+    throw error;
   }
 };
 
@@ -46,9 +47,8 @@ export const addVideo = async (video) => {
     return await response.json();
   } catch (error) {
     console.error("Failed to add video:", error);
-    throw error; // Rethrow the error for further handling
+    throw error;
   }
 };
 
 // You can add more functions for PUT, DELETE, etc.
-

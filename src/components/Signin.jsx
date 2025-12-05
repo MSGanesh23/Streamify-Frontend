@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './../assets/css/Signin.css';
 
+// Importing Backend API from .env
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const Signin = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
@@ -17,7 +20,7 @@ const Signin = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:30080/api/login", {
+      const response = await fetch(`${API_BASE_URL}/api/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
