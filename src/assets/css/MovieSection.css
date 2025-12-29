@@ -5,6 +5,12 @@
   position: relative;
 }
 
+.with-sidebar{
+  margin-left: 276px; /* 260px sidebar + ~16px outer margin */
+  padding-top: 80px;  /* space for TopNav */
+  box-sizing: border-box;
+}
+
 /* Title */
 .movie-section h2,
 .movie-section .section-title {

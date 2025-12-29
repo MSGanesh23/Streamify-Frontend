@@ -17,7 +17,7 @@ const MyListPage = () => {
   }, []);
 
   return (
-    <div>
+    <div className="with-sidebar">
       <Navbar />
       <h2 style={{ margin: "20px" }}>My Watchlist</h2>
       <MovieSection title="My List" movies={watchlist} />

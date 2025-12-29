@@ -1,28 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, Link, useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  FiHome,
+  FiHeart,
+  FiLogOut,
+  FiCreditCard,
+  FiMenu
+} from "react-icons/fi";
 import "./../assets/css/Navbar.css";
 
 const Navbar = () => {
-  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [collapsed, setCollapsed] = useState(true);
   const navigate = useNavigate();
-  const location = useLocation();
-
-  // Sync input with URL query
-  useEffect(() => {
-    const query = new URLSearchParams(location.search).get("q") || "";
-    setSearchTerm(query);
-  }, [location.search]);
-
-  // Debounce search
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (searchTerm.trim() !== "") {
-        navigate(`/search?q=${encodeURIComponent(searchTerm.trim())}`);
-      }
-    }, 500);
-    return () => clearTimeout(timer);
-  }, [searchTerm]);
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
@@ -31,37 +20,45 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar">
-      <h1 className="site-name">Streamify</h1>
+    <nav className={`navbar ${collapsed ? "collapsed" : ""}`}>
+      
+      {/* Toggle */}
+      <div className="toggle-btn" onClick={() => setCollapsed(!collapsed)}>
+        <FiMenu />
+      </div>
 
+      {/* Logo */}
+      <h1 className="site-name">{collapsed ? "S" : "Streamify"}</h1>
+
+      {/* Menu */}
       <ul className="menu">
-        <li><Link to="/userDashboard">Home</Link></li>
-        <li><Link to="/recently-added">Recently Added</Link></li>
-        <li><Link to="/my-list">My List</Link></li>
+        <li>
+          <Link to="/userDashboard">
+            <FiHome />
+            {!collapsed && <span>Home</span>}
+          </Link>
+        </li>
+
+        <li>
+          <Link to="/my-list">
+            <FiHeart />
+            {!collapsed && <span>My List</span>}
+          </Link>
+        </li>
       </ul>
 
-      <div className="search-container">
-        <input
-          type="text"
-          placeholder="Search movies, genres..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </div>
+      {/* Bottom */}
+      <div className="sidebar-bottom">
+        <button onClick={() => navigate("/payment")}>
+          <FiCreditCard />
+          {!collapsed && <span>Subscription</span>}
+        </button>
 
-      <div className="profile-logo" onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}>
-        <img src="../images/profile.png" alt="Profile" className="profile-image" />
+        <button className="logout" onClick={handleLogout}>
+          <FiLogOut />
+          {!collapsed && <span>Logout</span>}
+        </button>
       </div>
-
-      {isProfileMenuOpen && (
-        <div className="profile-menu">
-          <ul>
-            <li><Link to="/my-profile">My Profile</Link></li>
-            <li><button onClick={handleLogout}>Logout</button></li>
-            <li><button onClick={() => navigate("/payment")}>Subscription</button></li>
-          </ul>
-        </div>
-      )}
     </nav>
   );
 };

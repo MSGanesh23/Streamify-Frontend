@@ -1,8 +1,30 @@
+/* Global */
 body {
   margin: 0;
   min-height: 100vh;
   background: rgba(147, 51, 234, 0.15);
-  background-attachment: fixed; /* makes gradient cover all */
+  background-attachment: fixed;
   font-family: 'Poppins', sans-serif;
   color: white;
+  overflow-x: hidden; /* ⬅️ prevents horizontal scroll */
 }
+
+/* App layout (Navbar + Content) */
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Right-side content area */
+.main-content {
+  margin-left: 100px; /* MUST match navbar width */
+  width: calc(100% - 260px);
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+
+.navbar:not(.collapsed) ~ .main-content {
+  margin-left: 260px;
+}
+

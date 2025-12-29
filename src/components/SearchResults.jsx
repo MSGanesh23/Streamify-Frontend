@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import "./../assets/css/MovieSection.css";
+import TopNav from "./TopNav";
 
 // Importing Backend API from .env
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -32,6 +33,8 @@ const SearchResults = ({ results }) => {
   };
 
   return (
+    <>
+    <TopNav/>
     <div className="movie-section">
       {results.length > 0 ? (
         <div className="carousel-container">
@@ -70,6 +73,7 @@ const SearchResults = ({ results }) => {
         <p style={{ color: "#ccc" }}>No movies found.</p>
       )}
     </div>
+    </>
   );
 };
 

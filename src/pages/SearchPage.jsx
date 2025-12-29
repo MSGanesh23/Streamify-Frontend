@@ -32,7 +32,7 @@ const SearchPage = () => {
   }, [query]);
 
   return (
-    <div>
+    <div className="with-sidebar">
       <Navbar />
       <div style={{ padding: "20px", color: "#fff" }}>
         <h1>Search results for “{query}”</h1>

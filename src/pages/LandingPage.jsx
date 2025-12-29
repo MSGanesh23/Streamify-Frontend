@@ -4,6 +4,8 @@ import HeroBanner from "../components/HeroBanner";
 import MovieSection from "../components/MovieSection";
 import Footer from "../components/Footer";
 import "../assets/css/LandingPage.css";
+import TopNav from "../components/TopNav";
+
 // Importing Backend API from .env
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -39,11 +41,15 @@ const LandingPage = () => {
   return (
     <div className="LandingPage">
       {/* Pass search + genre handlers to Navbar */}
-      <Navbar
+
+      
+      {<Navbar
         genres={genres}
         onSearchChange={setSearchQuery}
         onGenreChange={setSelectedGenre}
-      />
+      />}
+
+      <TopNav/>
 
       {/* Hero Banner */}
       <HeroBanner

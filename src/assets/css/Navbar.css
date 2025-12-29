@@ -1,197 +1,168 @@
-/* Navbar.css */
-
-/* Import Google Font */
 @import url('https://fonts.googleapis.com/css2?family=Rouge+Script&display=swap');
 
-/* General Navbar Styling */
+/* ================== */
+/* Sidebar Container  */
+/* ================== */
 .navbar {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  height: calc(100vh - 24px);
+  width: 240px;
+  isolation: isolate;
+
+
+  background: rgba(15, 15, 20, 0.9); /* 🔥 CLEAN FIX */
+  backdrop-filter: blur(12px);
+
+  border-radius: 22px;
+  padding: 20px;
+
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #4427C2; /* Navbar background */
-  width: 100%;
-  padding: 10px 20px;
-  box-sizing: border-box;
-  position: relative;
-  height: 80px; /* Adjusted for better proportions */
+  flex-direction: column;
+  transition: width 0.3s ease;
+
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.45),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+
+  color: white;
+  z-index: 1000;
 }
 
+
+
+/* ================== */
+/* Logo / Site Name   */
+/* ================== */
 .site-name {
-  position: relative;
-  font-size: 50px;
-  font-weight: bold;
+  font-size: 42px;
+  font-family: 'Rouge Script', cursive;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* ================== */
+/* Menu Items         */
+/* ================== */
+.menu li a,
+.menu-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 1.05rem;
+  padding: 10px 14px;
+  border-radius: 12px;
+  transition: all 0.25s ease;
+}
+
+.menu{
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.menu li a:hover,
+.menu-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateX(4px);
+}
+
+/* Active route */
+.menu li.active a {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+}
+
+/* Divider */
+.menu-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 18px 0;
+}
+
+/* Logout */
+.menu-btn.logout {
+  color: #ffb3b3;
+}
+
+.menu-btn.logout:hover {
+  background: rgba(255, 90, 90, 0.2);
+}
+
+/* Collapsed */
+.navbar.collapsed {
+  width: 80px;
+}
+
+/* Toggle */
+.toggle-btn {
+  font-size: 1.4rem;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+/* Logo */
+.site-name {
   text-align: center;
   font-family: 'Rouge Script', cursive;
-  color: white;
-  -webkit-text-stroke: 2px violet; 
-  text-shadow: 2px 2px 5px rgba(138, 43, 226, 0.8);
+  font-size: 36px;
+  margin-bottom: 30px;
 }
 
-.menu-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
+/* Menu */
 .menu {
-  display: flex;
-  gap: 30px;
   list-style: none;
   padding: 0;
   margin: 0;
-  justify-content: center;
-  flex-grow: 1;
 }
 
 .menu li a {
-  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 12px;
   color: white;
-  font-size: 1.1rem;
-  transition: color 0.3s ease;
+  text-decoration: none;
+  
 }
 
 .menu li a:hover {
-  color: #f0f0f0;
+  background: rgba(255,255,255,0.15);
 }
 
-.search-bar {
+.menu svg {
+  font-size: 1.4rem;
+}
+
+/* Bottom actions */
+.sidebar-bottom {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar-bottom button {
   display: flex;
   align-items: center;
-  width: 200px;
-}
-
-.search-bar input {
-  padding: 5px 10px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  width: 100%;
-}
-
-.profile-logo {
-  display: flex;
-  align-items: center;
-  margin-left: 1rem;
-  position: relative; /* Position relative for the profile menu */
-}
-
-.profile-image {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%; /* Makes the image circular */
-  object-fit: cover;
-  border: 2px solid white;
-  cursor: pointer; /* Change cursor to pointer */
-}
-
-/* Profile Menu Styles */
-.profile-menu {
-  position: absolute; /* Position it absolutely */
-  top: 60px; /* Adjust based on your navbar height */
-  right: 0; /* Align to the right */
-  background-color: white; /* Background color */
-  border: 1px solid #ccc; /* Border */
-  border-radius: 4px; /* Rounded corners */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Shadow */
-  z-index: 1000; /* Ensure it appears above other elements */
-}
-
-.profile-menu ul {
-  list-style: none; /* Remove bullet points */
-  padding: 0; /* Remove padding */
-  margin: 0; /* Remove margin */
-}
-
-.profile-menu li {
-  padding: 10px 15px; /* Padding for each item */
-}
-
-.profile-menu li a {
-  text-decoration: none; /* Remove underline */
-  color: black; /* Text color */
-}
-
-.profile-menu li:hover {
-  background-color: #f0f0f0; /* Highlight on hover */
-}
-
-/* Hamburger Menu for Mobile */
-.menu-toggle {
-  display: none;
+  gap: 12px;
   background: transparent;
   border: none;
+  color: white;
+  padding: 12px;
+  border-radius: 12px;
   cursor: pointer;
+ 
 }
 
-.hamburger {
-  width: 30px;
-  height: 3px;
-  background-color: white;
-  border-radius: 5px;
-  position: relative;
+.sidebar-bottom button:hover {
+  background: rgba(255,255,255,0.15);
 }
 
-.hamburger::before,
-.hamburger::after {
-  content: '';
-  width: 30px;
-  height: 3px;
-  background-color: white;
-  border-radius: 5px;
-  position: absolute;
-  left: 0;
-  transition: transform 0.3s ease;
-}
-
-.hamburger::before {
-  top: -8px;
-}
-
-.hamburger::after {
-  top: 8px;
-}
-
-.menu-container.open .hamburger::before {
-  transform: rotate(45deg);
-  top: 0;
-}
-
-.menu-container.open .hamburger::after {
-  transform: rotate(-45deg);
-  top: 0;
-}
-
-/* Mobile Styling */
-@media (max-width: 768px) {
-  .menu {
-    position: absolute;
-    top: 80px;
-    left: 0;
-    width: 100%;
-    background-color: #4427C2;
-    flex-direction: column;
-    gap: 20px;
-    padding: 20px 0;
-    margin: 0;
-    transform: translateY(-100%);
-    transition: transform;
-  }
-
-  .menu-container.open .menu {
-    transform: translateY(0);
-  }
-
-  .menu-toggle {
-    display: block;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-  }
-
-  /* Adjust profile menu position on mobile to fit screen */
-  .profile-menu {
-    top: 70px; /* Slightly below navbar */
-    right: 10px;
-    width: 140px;
-  }
+.logout:hover {
+  background: rgba(229,9,20,0.35);
 }
